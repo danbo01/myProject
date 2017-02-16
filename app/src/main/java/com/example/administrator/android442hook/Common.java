@@ -29,7 +29,9 @@ public class Common {
     public static final String PACKAGEUTILS="com.android.packageinstaller.PackageUtil";
 
     public static final String BROADCAST_ACTION="";
-
+    public static final String ACTIVITYTHREAD="android.app.ActivityThread";
+    public static final String INSTRUMENTATION="android.app.Instrumentation";
+    public static final String ACTIVITY="android.app.Activity";
 
 
 }

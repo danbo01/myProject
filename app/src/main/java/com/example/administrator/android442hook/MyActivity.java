@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
 
 import de.robv.android.xposed.XposedBridge;
 
@@ -15,6 +16,7 @@ import de.robv.android.xposed.XposedBridge;
 
 public class MyActivity extends Activity {
     public static MyActivity ma;
+
 
     public static MyActivity getInstance(){
         XposedBridge.log("MyActivity....");
