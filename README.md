@@ -1,12 +1,12 @@
 # android442Hook
 init commit code
 
-/************************************************/\n\r
+/************************************************/
 USTC : University of Science and  Technology of China
 Student NO : SA16225432 
 Author : zhangqijun
 E-Mail : sa516432@mail.ustc.edu.cn
-/*************************************************/\n\r
+/*************************************************/
 
 
 
