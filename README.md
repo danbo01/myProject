@@ -2,10 +2,20 @@
 init commit code
 
 /************************************************/
+
+
 USTC : University of Science and  Technology of China
-Student NO : SA16225432 
+
+
+Student NO : SA16225432
+
+
 Author : zhangqijun
+
+
 E-Mail : sa516432@mail.ustc.edu.cn
+
+
 /*************************************************/
 
 
@@ -20,15 +30,32 @@ E-Mail : sa516432@mail.ustc.edu.cn
 
 
 /*********************************************************************************************************************/ 
+
+
 The installerpackage used follow as:
+
+
 1\PackageInstallerActivity.java
+
+
     |---Method : startInstallConfirm();
+
+
 2\PackageUtil.java
+
+
     |---Method : getAppSnippet(Activity,ApplicationInfo,Uri);
+
+
     |---Method : getPackageInfo(Uri);
     
-packageinstaller 
+packageinstaller
+
+
       URL:https://github.com/cubieboard/openbox_packages_apps_PackageInstaller
 
 Env:MIUI V5
+
+
+
 Android 4.4.2
