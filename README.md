@@ -58,8 +58,8 @@ packageinstaller source code URL:
 -------------------------------------------------------------------------------------------------------
 
 
-Env:MIUI V5
+Develop Environment:MIUI V5
 
 
 
-Android 4.4.2
+Android Version  4.4.2
