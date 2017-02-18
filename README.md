@@ -49,7 +49,7 @@ The installerpackage used follow as:
 
     |---Method : getPackageInfo(Uri);
     
-packageinstaller URL:
+packageinstaller source code URL:
 
 
       https://github.com/cubieboard/openbox_packages_apps_PackageInstaller
