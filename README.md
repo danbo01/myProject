@@ -4,7 +4,7 @@ init commit code
 /************************************************/
 
 
-USTC : University of Science and  Technology of China
+School : University of Science and  Technology of China (U.S.T.C)
 
 
 Student NO : SA16225432
