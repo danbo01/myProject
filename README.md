@@ -49,10 +49,10 @@ The installerpackage used follow as:
 
     |---Method : getPackageInfo(Uri);
     
-packageinstaller
+packageinstaller URL:
 
 
-      URL:https://github.com/cubieboard/openbox_packages_apps_PackageInstaller
+      https://github.com/cubieboard/openbox_packages_apps_PackageInstaller
 
 Env:MIUI V5
 
