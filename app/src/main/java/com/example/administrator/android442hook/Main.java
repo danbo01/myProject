@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 
+import java.io.File;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -14,7 +16,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 
 /**
- * Created by zhangqijun on 2017/2/13.
+ * Created by Danbo on 2017/2/13.
  */
 
 public class Main implements IXposedHookLoadPackage {
@@ -23,13 +25,13 @@ public class Main implements IXposedHookLoadPackage {
     public XC_MethodHook onCreateDialogHook;
     private Activity activity = null;
 
-    //private String apkFileName=null;
-
+    private String apkFilePath;
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam)
             throws Throwable {
-        XposedBridge.log("This is my hook>>>>>>>>>");
+        XposedBridge.log("This is my hook>>>");
 
+        //XposedBridge.log(loadPackageParam.packageName);
         //if not this package which i need
         if (!loadPackageParam.packageName.equals(Common.PACKAGEINSTALLER_PKG))
             return;
@@ -47,8 +49,9 @@ public class Main implements IXposedHookLoadPackage {
         }
 
         try {
-            //isInotifyFileMethod(String apkFileName)
-            onCreateDialogHookMethod(loadPackageParam);
+            //good apk
+            if(!CheckApk.checkApkFile(apkFilePath))
+                onCreateDialogHookMethod(loadPackageParam);
         } catch (Exception e) {
             XposedBridge.log(e.getMessage());
         }
@@ -57,13 +60,13 @@ public class Main implements IXposedHookLoadPackage {
     }//handleLoadPackage
 
     private void onCreateDialogHookMethod(XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
-        XposedBridge.log("~~~~~~~~~~~~~~~~~~~~~onCreateDialogHookMethod2 ");
+        XposedBridge.log("~~~onCreateDialogHookMethod2 ");
         onCreateDialogHook = new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 Dialog dlg = new AlertDialog.Builder(activity)
-                        .setTitle("小X同学")
-                        .setMessage("我爱你，真的很爱你！")
+                        .setTitle("温馨提醒")
+                        .setMessage("亲，你安装软件有问题！")
                         .setPositiveButton("朕知道了", null)
                         .create();
                 dlg.show();
@@ -79,16 +82,16 @@ public class Main implements IXposedHookLoadPackage {
 
     private void getAppSnippetHookMethod(XC_LoadPackage.LoadPackageParam loadPackageParam)
             throws Throwable {
-        XposedBridge.log("~~~~~~~~~~~~~~~~~~~~~getAppSnippetHookMethod ");
+        XposedBridge.log("~~~getAppSnippetHookMethod ");
         getAppSnippetHook = new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param)
                     throws Throwable {
                 activity = (Activity) param.args[0];
                 if (activity != null) {
-                    XposedBridge.log("~~~~~~~~~~~~~~~~~~~~~getAppSnippetHookMethod::activity>>>" + activity.getClass().toString());
+                    XposedBridge.log("~~~getAppSnippetHookMethod::activity>>>" + activity.getClass().toString());
                 } else {
-                    XposedBridge.log("~~~~~~~~~~~~~~~~~~~~~getAppSnippetHookMethod::activity>>> is null");
+                    XposedBridge.log("~~~getAppSnippetHookMethod::activity>>> is null");
                 }
             }
         };
@@ -98,13 +101,13 @@ public class Main implements IXposedHookLoadPackage {
                 "getAppSnippet",
                 Activity.class,
                 ApplicationInfo.class,
-                Uri.class,
+                File.class,
                 getAppSnippetHook);
     }
 
     private void getPackageInfoHookMethod(XC_LoadPackage.LoadPackageParam loadPackageParam)
             throws Throwable {
-        XposedBridge.log("~~~~~~~~~~~~~~~~~~~~~getPackageInfoHookMethod ");
+        XposedBridge.log("~~~getPackageInfoHookMethod ");
 
         getPackageInfoHook = new XC_MethodHook() {
             @Override
@@ -112,11 +115,10 @@ public class Main implements IXposedHookLoadPackage {
                     throws Throwable {
                 XposedBridge.log("getPackageInfoHook::beforeHookedMethod...");
 
-                Uri packageName = (Uri) param.args[0];
+                File packageName = (File) param.args[0];
                 XposedBridge.log("+++++++++beforeHookedMethod::packageName:" + packageName.toString());
-                //apkFileName=apkFileNameMethod(String packageName.toString())
-                XposedBridge.log("+++++++++beforeHookedMethod::path:" + packageName.getPath());
-
+                apkFilePath=packageName.toString();
+                XposedBridge.log("apkFileName:"+CheckFileName.getFileName(apkFilePath));
             }////beforeHookedMethod
 
         };
@@ -125,7 +127,7 @@ public class Main implements IXposedHookLoadPackage {
         XposedHelpers.findAndHookMethod(Common.PACKAGEUTILS,
                 loadPackageParam.classLoader,
                 "getPackageInfo",
-                Uri.class,
+                File.class,
                 getPackageInfoHook
         );
     }//getPackageInfoHookMethod
