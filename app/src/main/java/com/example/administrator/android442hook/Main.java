@@ -18,7 +18,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 /**
  * Created by Danbo on 2017/2/13.
  */
-
 public class Main implements IXposedHookLoadPackage {
     public XC_MethodHook getPackageInfoHook;
     public XC_MethodHook getAppSnippetHook;
@@ -31,8 +30,6 @@ public class Main implements IXposedHookLoadPackage {
             throws Throwable {
         XposedBridge.log("This is my hook>>>");
 
-        //XposedBridge.log(loadPackageParam.packageName);
-        //if not this package which i need
         if (!loadPackageParam.packageName.equals(Common.PACKAGEINSTALLER_PKG))
             return;
 
